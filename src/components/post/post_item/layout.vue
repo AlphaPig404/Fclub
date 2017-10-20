@@ -55,11 +55,15 @@
         this.$store.dispatch('toggleLike',{data:this.card,type:'post'})
       },
       tapComment(){
-        this.$store.dispatch('showEditor',{
-          title: '发表评论',
-          msg: this.card,
-          type: 'comment'
-        })
+        if(this.$global.isLogin){
+          this.$store.dispatch('showEditor',{
+            title: '发表评论',
+            msg: this.card,
+            type: 'comment'
+          })
+        }else{
+          this.$router.push({path: '/user/signin'})
+        }
       },
       tapRepost(){
 
