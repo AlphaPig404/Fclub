@@ -136,7 +136,7 @@
 	  	},
 	  	refresh: function(){
 	  		this.scroll && this.scroll.refresh()
-	  		this.$emit('scrollBar',this.scroll.hasVerticalScroll)
+	  		// this.$emit('scrollBar',this.scroll.hasVerticalScroll)
 	  	},
 	  	onScroll: function(){
 	  		this.scroll.on('scroll',pos=>{

@@ -14,6 +14,7 @@
 			<div class="block" v-for="(file,index) in pre_imgs" :key="index">
 				<div class="preview_img img-wrapper">
 					<div class="img" :style="{backgroundImage: 'url(' + flie2url(file)+ ')'}"></div>
+					<div class="img-cover" v-if="!img_urls[index]"></div>
 					<div class="delete" @click="deleteImg(index)">
 						<i class="iconfont icon-guanbi"></i>
 					</div>
@@ -182,14 +183,9 @@ export default {
 				}
 				const now = Date.now()
 				this.$http.post('https://upload-z2.qiniup.com',params,opts).then(res=>{
-					const url = QN + res.data.key
-					this.img_urls[index] = url
-					this.count++
-					
-					if(this.count>=total){
-						// alert(Date.now()-now)
-						// console.log(this.img_urls)
-					}
+						const url = QN + res.data.key
+						this.$set(this.img_urls,index,url)
+						this.count++
 				}).catch(err=>{
 					console.log(err)
 				})
@@ -332,6 +328,14 @@ export default {
 		height: 100%;
 		background-size: cover;
 		background-position: center;
+	}
+	.editor .img-wrapper .img-cover{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(255,255,255,.4)
 	}
 	.vslide-leave-active{
 		transition: transform 0.3s;
