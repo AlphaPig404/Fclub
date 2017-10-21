@@ -13,20 +13,20 @@ __注：此项目只用于学习交流，正常使用还请到各相关网站。
 ## 部分效果演示  
 
 ### 添加到主屏
-<img src="https://github.com/AlphaPig404/Fclub/gifs/GIF2.gif" width="250"/>
+<img src="https://github.com/AlphaPig404/Fclub/blob/master/gifs/GIF2.gif" width="250"/>
 
 ### 浏览
-<img src="https://github.com/AlphaPig404/Fclub/gifs/GIF3.gif" width="250"/>
+<img src="https://github.com/AlphaPig404/Fclub/blob/master/gifs/GIF3.gif" width="250"/>
 
 ### 发帖
-<img src="https://github.com/AlphaPig404/Fclub/gifs/GIF8.gif" width="250"/>
+<img src="https://github.com/AlphaPig404/Fclub/blob/master/gifs/GIF8.gif" width="250"/>
 
 ### 评论
 
-<img src="https://github.com/AlphaPig404/Fclub/gifs/GIF9.gif" width="250"/>  
+<img src="https://github.com/AlphaPig404/Fclub/blob/master/gifs/GIF9.gif" width="250"/>  
 
 ### 上传头像
-<img src="https://github.com/AlphaPig404/Fclub/gifs/GIF10.gif" width="250"/>
+<img src="https://github.com/AlphaPig404/Fclub/blob/master/gifs/GIF10.gif" width="250"/>
 
 
 ## 技术栈
@@ -38,7 +38,7 @@ __注：此项目只用于学习交流，正常使用还请到各相关网站。
 轮播图和每日放送部分用的是借用bilibili的接口   
 资讯部分用的是借用MissEVAN的接口  
 漫画频道用的是借用新浪漫画的接口  
-年度新番是按照番剧表从爱奇艺的搜索(全网)爬取的
+年度新番是按照番剧表从爱奇艺的搜索(全网)爬取的
 
 ## 使用说明
 
@@ -53,7 +53,7 @@ npm install
 npm run dev
 
 # 接口配置 
-需要将项目中的接口代理到线上，或者使用本地的mock数据
+需要将项目中的接口代理到线上，或者使用本地的mock数据
  proxyTable:{
   '/news': {
     target: 'http://wap.fulun.club',
