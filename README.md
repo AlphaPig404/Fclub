@@ -13,20 +13,20 @@ __注：此项目只用于学习交流，正常使用还请到各相关网站。
 ## 部分效果演示  
 
 ### 添加到主屏
-<img src="http://ofwmbpctf.bkt.clouddn.com/GIF2.gif" width="250"/>
+<img src="https://github.com/AlphaPig404/Fclub/gifs/GIF2.gif" width="250"/>
 
 ### 浏览
-<img src="http://ofwmbpctf.bkt.clouddn.com/GIF3.gif" width="250"/>
+<img src="https://github.com/AlphaPig404/Fclub/gifs/GIF3.gif" width="250"/>
 
 ### 发帖
-<img src="http://ofwmbpctf.bkt.clouddn.com/GIF8.gif" width="250"/>
+<img src="https://github.com/AlphaPig404/Fclub/gifs/GIF8.gif" width="250"/>
 
 ### 评论
 
-<img src="http://ofwmbpctf.bkt.clouddn.com/GIF9.gif" width="250"/>  
+<img src="https://github.com/AlphaPig404/Fclub/gifs/GIF9.gif" width="250"/>  
 
 ### 上传头像
-<img src="http://ofwmbpctf.bkt.clouddn.com/GIF10.gif" width="250"/>
+<img src="https://github.com/AlphaPig404/Fclub/gifs/GIF10.gif" width="250"/>
 
 
 ## 技术栈
