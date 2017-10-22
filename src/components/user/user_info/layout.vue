@@ -31,7 +31,7 @@
       <div class="row" @click="modifySex">
         <div class="name">性别</div>
         <div class="value">
-          <span>{{user_info.sex}}</span>
+          <span>{{formatSex(user_info.sex)}}</span>
           <i class="iconfont icon-return"></i>
         </div>
       </div>
@@ -109,6 +109,9 @@
       EditPage
     },
     methods:{
+      formatSex(sex){
+        return sex==='M'? '男':'女'
+      },
       loadImg(e){
         const target = e.target
         const id = target.id
