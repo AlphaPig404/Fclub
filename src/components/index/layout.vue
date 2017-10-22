@@ -10,8 +10,8 @@
         <v-footer></v-footer>
       </div>
     </scroll>
-    <transition :name="transition_name">
-      <router-view class="child-view"></router-view>
+    <transition name="slide" mode="in-out">
+      <router-view></router-view>
     </transition>
   </div>
   
@@ -43,7 +43,7 @@ export default {
       refresh_arr: [],
       show_iframe: false,
       iframe_src: '',
-      transition_name: '',
+      transition_name: 'slide-left',
     }
   },
   components:{
@@ -69,8 +69,10 @@ export default {
   // 如果isBack为true时，证明是用户点击了回退，执行slide-right动画
     let isBack = this.$router.isBack
     if (isBack) {
+      console.log('right')
     this.transition_name = 'slide-right'
     } else {
+      console.log('left')
     this.transition_name = 'slide-left'
     }
     // 做完回退动画后，要设置成前进动画，否则下次打开页面动画将还是回退
@@ -103,12 +105,10 @@ export default {
     margin-top: 10px;
   }
 
-  .child-view {
-    transition: all .3s cubic-bezier(.55,0,.1,1);
+  .slide-enter-active,.slide-leave-active{
+    transition: all 0.3s
   }
-  
-  .slide-left-enter, .slide-right-leave-active {
-    transform: translate3D(100%, 0,0);
+  .slide-enter,.slide-leave-to{
+    transform: translate3d(100%,0,0)
   }
- 
 </style>

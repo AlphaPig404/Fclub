@@ -2,7 +2,7 @@
   <transition name="vslide">
     <div class="user">
       <transition :name="transition_name">
-        <router-view></router-view>
+        <router-view class="child-view"></router-view>
       </transition>
     </div>
   </transition>
@@ -13,7 +13,7 @@
     name: 'user',
     data() {
       return {
-       transition_name: ''
+       transition_name: 'slide-left'
       }
     },
     beforeRouteUpdate(to,from,next){
@@ -46,6 +46,7 @@
   .vslide-enter, .vslide-leave-to{
     transform: translateY(100%)
   }
+  
   .slide-left-enter-active, .slide-right-leave-active {
     transition: all .3s
   }

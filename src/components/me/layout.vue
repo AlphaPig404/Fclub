@@ -94,6 +94,10 @@
         }
       })
     },
+    activated(){
+      // 用户信息需要每次都获取
+      this.getUserMsg()
+    },
     methods:{
       checkNav(){
         this.show_fixed_tabs = false

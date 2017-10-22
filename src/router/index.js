@@ -27,7 +27,7 @@ const about = resolve => require(['@/components/me/about/layout'], resolve)
 const favor = resolve => require(['@/components/me/favor/layout'], resolve)
 const myposts = resolve => require(['@/components/me/myposts/layout'], resolve)
 
-Router.prototype.go = function () {
+Router.prototype.goBack = function () {
  this.isBack = true
  window.history.go(-1)
 }
@@ -46,8 +46,7 @@ export default new Router({
       name: 'index',
       component: index,
       meta: {
-        title: '追番',
-        keepAlive: true
+        title: '追番'
       },
       children:[
         {
@@ -105,8 +104,7 @@ export default new Router({
       name: 'message',
       component: message,
       meta: {
-        title: '消息',
-        keepAlive: true
+        title: '消息'
       },
     },
     {
@@ -178,7 +176,7 @@ export default new Router({
           component: signin,
           meta: {
             title: '登录',
-            return: true
+            cancel: true
           }
         },
         {
