@@ -2,9 +2,11 @@
   <div class="post">
     <scroll :data="refresh_arr" 
             :onscroll='true' 
-            :pullDownRefresh='true' 
+            :pullDownRefresh='true'
+            :pullUpLoad='true' 
             :isLoading="is_loading"
-            @pullingDown="pullingDown">
+            @pullingDown="pullingDown"
+            @pullingUp="pullingUp">
       <div class="card-wrapper">
         <post-card  v-for="(card,key) in posts" 
                     :key="key" 
@@ -48,7 +50,7 @@
       TransRouter
     },
     mounted(){
-      this.getPosts()
+      this.getPosts(true)
 
       this.bus.$on('refresh',from=>{
         if(from==='post'){
@@ -70,13 +72,23 @@
           this.$router.push({path: '/user/signin'})
         }
       },
-      getPosts(){
+      getPosts(flag,createdAt){
         // 查询微贴，No 107
-        this.$http.get('/post').then(res=>{
+        const query = {
+          params:{
+            createdAt:createdAt||null
+          }
+        }
+        this.$http.get('/post',query).then(res=>{
           const _data = res.data
           this.is_loading = false
           if(!_data.result){
-            this.posts = _data.data
+            if(flag){
+              this.posts = this.posts.concat(_data.data)
+            }else{
+              this.posts = _data.data
+            }
+            
           }
         }).catch(err=>{
           console.log(err)
@@ -92,8 +104,14 @@
       pullingDown(){
         this.is_loading = true
         setTimeout(()=>{
-          this.getPosts()
+          this.getPosts(false)
         },500)
+      },
+      pullingUp(){
+        if(!this.posts){return}
+        const posts = this.posts
+        const createdAt = posts[posts.length-1].createdAt
+        this.getPosts(true,createdAt)
       }
     }
   }

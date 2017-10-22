@@ -13,6 +13,7 @@ const otaku = resolve => require(['@/components/index/otaku/layout'], resolve)
 const news = resolve => require(['@/components/index/news/layout'], resolve)
 const timeline = resolve => require(['@/components/index/timeline/layout'], resolve)
 const year = resolve => require(['@/components/index/year/layout'], resolve)
+const season = resolve => require(['@/components/index/year/season/layout'], resolve)
 const manhua = resolve => require(['@/components/index/manhua/layout'], resolve)
 const myIframe = resolve => require(['@/components/index/my-iframe'], resolve)
 
@@ -61,9 +62,19 @@ export default new Router({
           path: 'year',
           component: year,
           meta: {
-            title: '年度新番',
+            title: '分季列表',
             return: true
-          }
+          },
+          children:[
+            { 
+              path: 'season',
+              component: season,
+              meta: {
+               title: '季度新番',
+               return: true
+              }
+            }
+          ]
         },
         {
           path: 'timeline',

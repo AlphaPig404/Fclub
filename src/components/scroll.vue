@@ -1,9 +1,11 @@
 <template>
   <div class="scroll-wrapper" ref="wrapper">
 		<div :class="{'inner-wrapper':scrollX}">
-			<loading :showFlag="isLoading" ></loading>
+			<loading :showFlag="isLoading"></loading>
+			<!-- 内容加载 -->
 			<slot>
 			</slot>
+			<!-- 内容加载 -->
 			<div class="pull-down-refresh" v-if="pullDownRefresh">
 				<div class="drag">
 					<div class="down" v-show="!is_pulling_down">
@@ -17,7 +19,7 @@
 				</div>
 			</div>
 			<div class="pull-up-load" v-if="pullUpLoad">
-				<loading></loading>
+				<loading :showFlag="true"></loading>
 			</div>
 		</div>
   </div>
@@ -35,7 +37,8 @@
 			return{
         is_pulling_down: false,
 				is_loading: false,
-				is_pulling_refreshing: false
+				is_pulling_refreshing: false,
+				isPullUpLoad: false,
 			}
 	  },
 	  props:{
@@ -78,15 +81,17 @@
 			isLoading: {
 				type: Boolean,
 				default: false
+			},
+			from:{
+				type: String,
+				default: '',
+				desc: '来自哪个父组件'
 			}
 	  },
 	  watch:{
 	  	data: function(){
 	  		setTimeout(()=>{
-					if(this.pullDownRefresh){
-						this.fillChildHeight()
-					}
-	  			this.refresh()
+					this.forceUpdate()
 	  		},100)
 	  	},
 			isLoading: function(newData){
@@ -118,7 +123,8 @@
 	  		this.scroll = new BScroll(this.$refs.wrapper,{
 	  			click: this.click,
 	  			probeType: this.probeType,
-					scrollX: this.scrollX
+					scrollX: this.scrollX,
+					pullUpLoad: this.pullUpLoad
 	  		})
 		
 				if(this.onscroll){
@@ -154,18 +160,26 @@
 			},
 			fillChildHeight(){
 				// 子元素高度不够时仍可以滚动
-				console.log('fill')
 				const wrapper = this.$refs.wrapper
 				const child = wrapper.children[0]
 				const wHeight = wrapper.clientHeight
 				const cHeight = child.clientHeight 
-				console.log(wHeight,cHeight)
 				if(cHeight < wHeight){
 					child.style.height = wHeight +1 +'px'
 				}else{
 					child.style.height = ''
 				}
 				this.refresh()
+			},
+			alignCenter(){
+				const wrapper = this.$refs.wrapper
+				const child = wrapper.children[0]
+				const wWidth = wrapper.clientWidth
+				const cWidth = child.clientWidth
+
+				const offsetX = (wWidth - cWidth)/2
+
+				this.scroll&&this.scroll.scrollTo(offsetX,0,300)
 			},
 			_initPullDownRefresh() {
         this.scroll.on('scroll', pos=>{
@@ -181,7 +195,20 @@
         })
       },
 			_initPullUpLoad(){
-
+				this.scroll.on('pullingUp', () => {
+          this.isPullUpLoad = true
+          this.$emit('pullingUp')
+        })
+			},
+			forceUpdate(){
+				if(this.pullDownRefresh){
+					this.fillChildHeight()
+				}
+				if(this.from==='timeline'){
+					console.log('timeline')
+					this.alignCenter()
+				}
+	  		this.refresh()
 			}
 	  }
 	}

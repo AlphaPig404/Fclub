@@ -4,7 +4,7 @@
       <i class="iconfont" :class="'icon-'+formatIcon(init)"></i>
       <span>{{init.season||init.title}}</span>
     </p>
-    <router-link tag='div' :to='init.season||init.path' class="show-more">
+    <router-link tag='div' :to='formatPath(init)' class="show-more">
       <span>{{init.more||'更多'}}</span>
       <i class="iconfont icon-return"></i>
     </router-link>
@@ -35,6 +35,9 @@ export default {
       }else{
         return item.icon || ''
       }
+    },
+    formatPath(item){
+      return item.season?'/index/year/season?query='+item.season:item.path
     }
   }
 }

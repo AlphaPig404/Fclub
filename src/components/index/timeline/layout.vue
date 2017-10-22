@@ -1,6 +1,6 @@
 <template>
   <div class="timeline">
-    <scroll :scrollX="true" :data="new_data">
+    <scroll :scrollX="true" :data="new_data" from="timeline">
       <div class="time-wrapper">
         <div class="item-wrapper" v-for="(item,key) in new_data" :key="key">
           <div class="item" :class="{'checked-item': item.is_today}" @click="chooseDay(key)">

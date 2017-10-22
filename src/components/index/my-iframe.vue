@@ -2,7 +2,7 @@
   <div class="my-iframe">
     <!-- <scroll :data="refresh_arr"> -->
       <!-- <div> -->
-        <iframe :src="iframe_src" frameborder="0" scrolling="no"></iframe>
+        <iframe :src="iframe_src" frameborder="0" :scrolling="switchScroll()"></iframe>
       <!-- </div> -->
     <!-- </scroll> -->
   </div>
@@ -23,6 +23,16 @@
     },
     mounted(){
       this.iframe_src = this.$route.query.src
+    },
+    methods:{
+      isAndroid(){
+        const u = navigator.userAgent
+        const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        return isAndroid
+      },
+      switchScroll(){
+        return this.isAndroid()?'':'no'
+      }
     }
   }
 </script>

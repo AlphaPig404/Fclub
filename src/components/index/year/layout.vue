@@ -1,6 +1,6 @@
 <template>
   <div class="year">
-    <scroll>
+    <scroll :data="seasons_data">
       <div class="groups">
         <div class="group" v-for="(item,key) in seasons_data" :key="key">
           <group-bar :init="item"></group-bar>
@@ -8,6 +8,9 @@
         </div>
       </div>
     </scroll>
+    <transition name="slide">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -73,5 +76,12 @@ export default {
   width:100%;
   z-index: 2;
   overflow: hidden;
+}
+.slide-enter-active,.slide-leave-active{
+  transition: all 0.3s
+}
+
+.slide-enter,.slide-leave-to{
+  transform: translate(100%,0)
 }
 </style>
