@@ -3,7 +3,8 @@
     <scroll :data="refresh_arr" 
             :onscroll='true' 
             :pullDownRefresh='true'
-            :pullUpLoad='true' 
+            :pullUpLoad='true'
+            :pullUpDirty='pullUpDirty'
             :isLoading="is_loading"
             @pullingDown="pullingDown"
             @pullingUp="pullingUp">
@@ -41,6 +42,7 @@
         show_editor: false,
         refresh_arr:[],
         is_loading: false,
+        pullUpDirty: true
       }
     },
     components:{
@@ -84,9 +86,14 @@
           this.is_loading = false
           if(!_data.result){
             if(flag){
+              if(!_data.data.length){
+                // 数据全部加载
+                this.pullUpDirty = false
+              }
               this.posts = this.posts.concat(_data.data)
             }else{
               this.posts = _data.data
+              this.pullUpDirty = true
             }
             
           }
@@ -133,7 +140,6 @@
     left: 0;
     overflow: hidden;
     box-sizing: border-box;
-    padding-bottom: 10px;
     -webkit-overflow-scrolling: touch; 
     /* 父元素设置上面的属性会影响到子元素的fixed??    */
   }

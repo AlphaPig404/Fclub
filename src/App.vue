@@ -35,17 +35,27 @@ export default {
     }
   },
   created(){
-    // 检查登录状态
-    this.$http.get('/check_login').then(res=>{
-      const data = res.data
-      if(!data.result){
-        this.$global.isLogin = true
-      }else{
-        this.$global.isLogin = false
-      }
-    }).catch(err=>{
+    this.checkLogin()
+    // this.checkUserAgent()
+  },
+  methods:{
+    checkLogin(){
+      // 检查登录状态
+      this.$http.get('/check_login').then(res=>{
+        const data = res.data
+        if(!data.result){
+          this.$global.isLogin = true
+        }else{
+          this.$global.isLogin = false
+        }
+      }).catch(err=>{
 
-    })
+      })
+    },
+    checkUserAgent(){
+      const u = navigator.userAgent
+      alert(u)
+    }
   }
 }
 </script>

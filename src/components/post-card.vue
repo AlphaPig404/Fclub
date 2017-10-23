@@ -92,6 +92,9 @@ export default {
   text-align: left;
   font-size: 14px;
 }
+.post-card:last-child{
+  margin-bottom: 0;
+}
 
 .user {
   display: flex;

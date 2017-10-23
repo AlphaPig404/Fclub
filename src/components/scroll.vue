@@ -19,7 +19,8 @@
 				</div>
 			</div>
 			<div class="pull-up-load" v-if="pullUpLoad">
-				<loading :showFlag="true"></loading>
+				<loading :showFlag="true" v-if="pullUpDirty"></loading>
+				<v-footer v-else></v-footer>
 			</div>
 		</div>
   </div>
@@ -29,6 +30,8 @@
 
 	import BScroll from 'better-scroll'
 	import Loading from './loading'
+	import VFooter from './footer'
+
 	const BUFFER = 50
 
 	export default {
@@ -38,7 +41,7 @@
         is_pulling_down: false,
 				is_loading: false,
 				is_pulling_refreshing: false,
-				isPullUpLoad: false,
+				isPullUpLoad: true
 			}
 	  },
 	  props:{
@@ -78,6 +81,10 @@
         type: null,
         default: false
       },
+			pullUpDirty:{
+				type: null,
+        default: false
+			},
 			isLoading: {
 				type: Boolean,
 				default: false
@@ -110,10 +117,17 @@
 	  		setTimeout(()=>{
 	  			newData ? this.enableScroll() : this.disableScroll()
 	  		},20)
-	  	}
+	  	},
+			pullUpDirty: function(newData){
+				// 下拉更新后重新刷新
+				if(newData){
+					this.scroll.finishPullUp()
+				}
+			}
 	  },
 		components:{
-			Loading
+			Loading,
+			VFooter
 		},
 	  mounted(){
 	  	this._initBscroll()
@@ -207,6 +221,11 @@
 				if(this.from==='timeline'){
 					console.log('timeline')
 					this.alignCenter()
+				}
+				if (this.pullUpLoad && this.isPullUpLoad) {
+          this.isPullUpLoad = false
+          this.scroll.finishPullUp()
+          this.refresh()
 				}
 	  		this.refresh()
 			}
