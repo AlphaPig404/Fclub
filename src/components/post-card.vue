@@ -145,8 +145,9 @@ export default {
   object-fit: cover    
 }
 .card-content .imgs .img1{
+  width: auto;
   max-width: 80%;
-  max-height: 180px;
+  max-height: 200px;
 }
 .card-content .imgs .img-single{
   max-width: 200px;
